@@ -9,7 +9,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
-        ddl-auto: none
+        ddl-auto: validate
         temp:
           use_jdbc_metadata_defaults: false
   liquibase:

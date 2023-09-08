@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: "01-chageset-account-table.yaml"
+      relativeToChangelogFile: true
+  - include:
+      file: "10-chageset-user-table.yaml"
+      relativeToChangelogFile: true
+  - include:
+      file: "20-chageset-role-table.yaml"
+      relativeToChangelogFile: true
+  - include:
+      file: "30-chageset-account_to_role-table.yaml"
+      relativeToChangelogFile: true
