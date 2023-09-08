@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: admin
+    password: "admin"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        ddl-auto: none
+        temp:
+          use_jdbc_metadata_defaults: false
+  liquibase:
+    drop-first: false
+    change-log: classpath:db/changelog/changelog-master.yaml
+    enabled: true
+    default-schema: public
+server:
+  port: 9090
