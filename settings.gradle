@@ -1,2 +1,8 @@
-rootProject.name = 'anotherone'
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
 
+rootProject.name = 'anotherone'
