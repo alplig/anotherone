@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-add-table-users"
+      changes:
+        - createTable:
+            tableName: USERS
+            columns:
+              - column:
+                 name: ID
+                 type: BIGINT
+                 autoIncrement: true
+                 constraints:
+                   primaryKey: true
+                   nullable: false
+              - column:
+                  name: CREATED
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: MODIFIED
+                  type: TIMESTAMP
+              - column:
+                  name: IS_DELETED
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: FIRST_NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LAST_NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: MIDDLE_NAME
+                  type: VARCHAR(255)
+              - column:
+                  name: ACCOUNT_ID
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: ACCOUNT_FK
+                    referencedTableName: ACCOUNT
+                    referencedColumnNames: ID
+                    deleteCascade: true

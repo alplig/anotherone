@@ -4,6 +4,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+###h2###
+db.mv.db
+db.trace.db
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

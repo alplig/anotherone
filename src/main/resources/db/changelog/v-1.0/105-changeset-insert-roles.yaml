@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-insert-role"
+      changes:
+        - insert:
+            tableName: ROLE
+            columns:
+              - column:
+                  name: USER_ROLE
+                  value: ADMIN
+        - insert:
+            tableName: ROLE
+            columns:
+              - column:
+                  name: USER_ROLE
+                  value: CUSTOMER

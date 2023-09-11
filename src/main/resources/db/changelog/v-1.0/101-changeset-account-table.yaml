@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-add-table-account"
+      changes:
+        - createTable:
+            tableName: ACCOUNT
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: CREATED
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: MODIFIED
+                  type: TIMESTAMP
+              - column:
+                  name: IS_DELETED
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EMAIL
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: PHONE_NUM
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: NEW_PASSWORD_HASH
+                  type: BIGINT
+              - column:
+                  name: PASSWORD_HASH
+                  type: BIGINT
+                  constraints:
+                    nullable: false

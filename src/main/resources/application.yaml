@@ -13,9 +13,9 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
   liquibase:
+    enabled: true
     drop-first: false
     change-log: classpath:db/changelog/changelog-master.yaml
-    enabled: true
     default-schema: public
 server:
   port: 9090

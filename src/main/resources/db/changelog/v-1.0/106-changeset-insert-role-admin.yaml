@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - property:
+      name: now
+      value: "sysdate"
+      dbms: "oracle"
+  - property:
+      name: now
+      value: "now()"
+      dbms: "postgresql"
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-insert-role-admin"
+      changes:
+        - insert:
+            tableName: USERS
+            columns:
+              - column:
+                  name: CREATED
+                  value:

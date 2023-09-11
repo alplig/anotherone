@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-add-table-account_to_role"
+      changes:
+        - createTable:
+            tableName: ACCOUNT_TO_ROLE
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: CREATED
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: MODIFIED
+                  type: TIMESTAMP
+              - column:
+                  name: IS_DELETED
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ACCOUNT_ID
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: ACCOUNT_FK
+                    referencedTableName: ACCOUNT
+                    referencedColumnNames: ID
+                    deleteCascade: true
+              - column:
+                  name: ROLE_ID
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: ROLE_FK
+                    referencedTableName: ROLE
+                    referencedColumnNames: ID
+                    deleteCascade: true
+              - column:
+                  name: START_DATE
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: END_DATE
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true

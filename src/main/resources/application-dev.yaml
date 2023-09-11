@@ -1,0 +1,20 @@
+spring:
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db/changelog/changelog-master.yaml
+    default-schema: public
+  datasource:
+    url: jdbc:h2:file:./db
+    username: dev
+    password: dev
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: true
+server:
+  port: 9090

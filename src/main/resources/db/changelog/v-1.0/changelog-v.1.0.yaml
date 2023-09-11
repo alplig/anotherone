@@ -1,13 +1,19 @@
 databaseChangeLog:
   - include:
-      file: "01-chageset-account-table.yaml"
+      file: "101-changeset-account-table.yaml"
       relativeToChangelogFile: true
   - include:
-      file: "10-chageset-user-table.yaml"
+      file: "102-changeset-users-table.yaml"
       relativeToChangelogFile: true
   - include:
-      file: "20-chageset-role-table.yaml"
+      file: "103-changeset-role-table.yaml"
       relativeToChangelogFile: true
   - include:
-      file: "30-chageset-account_to_role-table.yaml"
+      file: "104-changeset-account-to-role-table.yaml"
+      relativeToChangelogFile: true
+  - include:
+      file: "105-changeset-insert-roles.yaml"
+      relativeToChangelogFile: true
+  - include:
+      file: "106-changeset-insert-role-admin.yaml"
       relativeToChangelogFile: true
