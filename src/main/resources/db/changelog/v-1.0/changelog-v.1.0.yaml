@@ -15,5 +15,5 @@ databaseChangeLog:
       file: "105-changeset-insert-roles.yaml"
       relativeToChangelogFile: true
   - include:
-      file: "106-changeset-insert-role-admin.yaml"
+      file: "106-changeset-insert-account-admin.yaml"
       relativeToChangelogFile: true

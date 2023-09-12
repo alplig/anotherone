@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - property:
+      name: now
+      value: "now()"
+      dbms: "postgresql"
+  - property:
+      name: now
+      value: "CURRENT_TIMESTAMP()"
+      dbms: h2
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-insert-account-admin"
+      changes:
+        - insert:
+            tableName: ACCOUNT
+            columns:
+              - column:
+                  name: CREATED
+                  valueDate: ${now}
+              - column:
+                  name: EMAIL
+                  value: "admin@admin.3sl"
+              - column:
+                  name: PASSWORD_HASH
+                  valueNumeric: "1234"
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-insert-user-admin"
+      changes:
+        - insert:
+            tableName: USERS
+            columns:
+              - column:
+                  name: CREATED
+                  valueDate: ${now}
+              - column:
+                  name: FIRST_NAME
+                  value: admin
+              - column:
+                  name: LAST_NAME
+                  value: admin
+              - column:
+                  name: ACCOUNT_ID
+                  valueNumeric: "1"
+  - changeSet:
+      author: "Alex Platonov"
+      id: "1.0-insert-add-role-for-admin"
+      changes:
+        - insert:
+            tableName: ACCOUNT_TO_ROLE
+            columns:
+              - column:
+                  name: CREATED
+                  valueDate: ${now}
+              - column:
+                  name: ACCOUNT_ID
+                  valueNumeric: "1"
+              - column:
+                  name: ROLE_ID
+                  valueNumeric: "SELECT ID FROM ROLE WHERE USER_ROLE = 'ADMIN'"
+              - column:
+                  name: START_DATE
+                  valueDate: ${now}

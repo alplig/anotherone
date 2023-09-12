@@ -31,7 +31,7 @@ databaseChangeLog:
                   name: ACCOUNT_ID
                   type: BIGINT
                   constraints:
-                    foreignKeyName: ACCOUNT_FK
+                    foreignKeyName: ACCOUNT_TO_ROLE_FK
                     referencedTableName: ACCOUNT
                     referencedColumnNames: ID
                     deleteCascade: true
