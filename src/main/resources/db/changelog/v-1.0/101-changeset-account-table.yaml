@@ -4,44 +4,44 @@ databaseChangeLog:
       id: "1.0-add-table-account"
       changes:
         - createTable:
-            tableName: ACCOUNT
+            tableName: account
             columns:
               - column:
-                  name: ID
+                  name: id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: CREATED
+                  name: created
                   type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
-                  name: MODIFIED
+                  name: modified
                   type: TIMESTAMP
               - column:
-                  name: IS_DELETED
+                  name: is_deleted
                   type: BOOLEAN
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
               - column:
-                  name: EMAIL
+                  name: email
                   type: VARCHAR(255)
                   constraints:
                     unique: true
               - column:
-                  name: PHONE_NUM
+                  name: phone_num
                   type: VARCHAR(255)
                   constraints:
                     unique: true
               - column:
-                  name: NEW_PASSWORD_HASH
+                  name: new_password_hash
                   type: BIGINT
               - column:
-                  name: PASSWORD_HASH
+                  name: password_hash
                   type: BIGINT
                   constraints:
                     nullable: false

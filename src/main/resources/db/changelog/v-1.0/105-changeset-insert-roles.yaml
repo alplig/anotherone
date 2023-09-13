@@ -4,14 +4,14 @@ databaseChangeLog:
       id: "1.0-insert-role"
       changes:
         - insert:
-            tableName: ROLE
+            tableName: role
             columns:
               - column:
-                  name: USER_ROLE
+                  name: user_role
                   value: ADMIN
         - insert:
-            tableName: ROLE
+            tableName: role
             columns:
               - column:
-                  name: USER_ROLE
+                  name: user_role
                   value: CUSTOMER

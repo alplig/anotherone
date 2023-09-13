@@ -4,52 +4,52 @@ databaseChangeLog:
       id: "1.0-add-table-account_to_role"
       changes:
         - createTable:
-            tableName: ACCOUNT_TO_ROLE
+            tableName: account_to_role
             columns:
               - column:
-                  name: ID
+                  name: id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: CREATED
+                  name: created
                   type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
-                  name: MODIFIED
+                  name: modified
                   type: TIMESTAMP
               - column:
-                  name: IS_DELETED
+                  name: is_deleted
                   type: BOOLEAN
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
               - column:
-                  name: ACCOUNT_ID
+                  name: account_id
                   type: BIGINT
                   constraints:
-                    foreignKeyName: FK_ACCOUNT_ACCOUNTTOROLE
-                    referencedTableName: ACCOUNT
-                    referencedColumnNames: ID
+                    foreignKeyName: fk_account_accounttorole
+                    referencedTableName: account
+                    referencedColumnNames: id
                     deleteCascade: true
               - column:
-                  name: ROLE_ID
+                  name: role_id
                   type: BIGINT
                   constraints:
-                    foreignKeyName: FK_ACCOUNT_ROLE
-                    referencedTableName: ROLE
-                    referencedColumnNames: ID
+                    foreignKeyName: fk_account_role
+                    referencedTableName: role
+                    referencedColumnNames: id
                     deleteCascade: true
               - column:
-                  name: START_DATE
+                  name: start_date
                   type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
-                  name: END_DATE
+                  name: end_date
                   type: TIMESTAMP
                   constraints:
                     nullable: true

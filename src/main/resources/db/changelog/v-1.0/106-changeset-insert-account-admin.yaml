@@ -7,37 +7,40 @@ databaseChangeLog:
       name: now
       value: "CURRENT_TIMESTAMP()"
       dbms: h2
+  - property:
+      name: getId
+      value: "(SELECT ID FROM ROLE WHERE USER_ROLE = 'ADMIN')"
   - changeSet:
       author: "Alex Platonov"
       id: "1.0-insert-account-admin"
       changes:
         - insert:
-            tableName: ACCOUNT
+            tableName: account
             columns:
               - column:
-                  name: CREATED
+                  name: created
                   valueDate: ${now}
               - column:
-                  name: EMAIL
+                  name: email
                   value: "admin@admin.3sl"
               - column:
-                  name: PASSWORD_HASH
+                  name: password_hash
                   valueNumeric: "1234"
   - changeSet:
       author: "Alex Platonov"
       id: "1.0-insert-user-admin"
       changes:
         - insert:
-            tableName: USERS
+            tableName: users
             columns:
               - column:
-                  name: CREATED
+                  name: created
                   valueDate: ${now}
               - column:
                   name: FIRST_NAME
                   value: admin
               - column:
-                  name: LAST_NAME
+                  name: last_name
                   value: admin
               - column:
                   name: ACCOUNT_ID
@@ -47,17 +50,17 @@ databaseChangeLog:
       id: "1.0-insert-add-role-for-admin"
       changes:
         - insert:
-            tableName: ACCOUNT_TO_ROLE
+            tableName: account_to_role
             columns:
               - column:
-                  name: CREATED
+                  name: created
                   valueDate: ${now}
               - column:
-                  name: ACCOUNT_ID
+                  name: account_id
                   valueNumeric: "1"
               - column:
-                  name: ROLE_ID
-                  valueNumeric: "SELECT ID FROM ROLE WHERE USER_ROLE = 'ADMIN'"
+                  name: role_id
+                  valueComputed: ${getId}
               - column:
-                  name: START_DATE
+                  name: start_date
                   valueDate: ${now}

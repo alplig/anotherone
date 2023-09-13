@@ -5,13 +5,13 @@ spring:
     username: admin
     password: "admin"
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        show_sql: true
-        ddl-auto: validate
-        temp:
-          use_jdbc_metadata_defaults: false
+    hibernate:
+      #naming:
+        #implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
   liquibase:
     enabled: true
     drop-first: false

@@ -4,47 +4,47 @@ databaseChangeLog:
       id: "1.0-add-table-users"
       changes:
         - createTable:
-            tableName: USERS
+            tableName: users
             columns:
               - column:
-                 name: ID
+                 name: id
                  type: BIGINT
                  autoIncrement: true
                  constraints:
                    primaryKey: true
                    nullable: false
               - column:
-                  name: CREATED
+                  name: created
                   type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
-                  name: MODIFIED
+                  name: modified
                   type: TIMESTAMP
               - column:
-                  name: IS_DELETED
+                  name: is_deleted
                   type: BOOLEAN
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
               - column:
-                  name: FIRST_NAME
+                  name: first_name
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: LAST_NAME
+                  name: last_name
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: MIDDLE_NAME
+                  name: middle_name
                   type: VARCHAR(255)
               - column:
-                  name: ACCOUNT_ID
+                  name: account_id
                   type: BIGINT
                   constraints:
-                    foreignKeyName: ACCOUNT_USERS_FK
+                    foreignKeyName: account_users_fk
                     referencedTableName: ACCOUNT
                     referencedColumnNames: ID
                     deleteCascade: true

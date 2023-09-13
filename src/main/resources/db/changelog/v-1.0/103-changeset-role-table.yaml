@@ -4,23 +4,23 @@ databaseChangeLog:
       id: "1.0-add-table-role"
       changes:
         - createTable:
-            tableName: ROLE
+            tableName: role
             columns:
               - column:
-                  name: ID
+                  name: id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: IS_DELETED
+                  name: is_deleted
                   type: BOOLEAN
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
               - column:
-                  name: USER_ROLE
+                  name: user_role
                   type: VARCHAR(20)
                   constraints:
                     nullable: false
