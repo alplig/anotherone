@@ -3,6 +3,7 @@ package org.anotherone.services;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.anotherone.dto.AccountResponse;
 import org.anotherone.dto.CreateUserRequest;
 import org.anotherone.dto.UsersResponse;
@@ -18,8 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserService{
 
     private final UsersRepository usersRepository;
@@ -37,6 +40,7 @@ public class UserServiceImpl implements UserService{
     }
 
     private UsersResponse buildUserResponse(@NonNull Users user) {
+        log.info("USER: " + user.toString());
         return new UsersResponse()
                 .setAccount(buildAccountResponse(user.getAccountId()))
                 .setCreated(user.getCreated().toLocalDateTime())
@@ -46,16 +50,18 @@ public class UserServiceImpl implements UserService{
     }
 
     private AccountResponse buildAccountResponse (@NonNull Account account){
+        log.info("ACCOUNT: " + account.toString());
         return new AccountResponse()
                 .setEmail(account.getEmail())
                 .setPhoneNum(account.getPhoneNum())
                 .setRoles(getAllAccountRoles(account.getId()));
     }
 
-    private List<String> getAllAccountRoles(Long accountId) {
-        return accountToRoleRepository.findById(accountId)
-                .stream()
-                .map(AccountToRole::getRoleId)
+    @Transactional(readOnly = true)
+    public List<String> getAllAccountRoles(Long accountId) {
+        log.info("account ID for role list: " + accountId);
+        List<Role> entities = accountToRoleRepository.findAllRoleByAccountId(accountId);
+        return entities.stream()
                 .map(Role::getUserRole)
                 .collect(Collectors.toList());
     }
