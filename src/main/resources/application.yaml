@@ -17,5 +17,8 @@ spring:
     drop-first: false
     change-log: classpath:db/changelog/changelog-master.yaml
     default-schema: public
+springdoc:
+  swagger-ui:
+    path: swagger-ui.html
 server:
   port: 9090

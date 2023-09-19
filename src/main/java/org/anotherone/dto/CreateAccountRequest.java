@@ -12,5 +12,6 @@ public class CreateAccountRequest {
 
     private String email;
     private String phoneNum;
+    private Long password;
     private List<Role> role;
 }

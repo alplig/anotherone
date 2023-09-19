@@ -8,6 +8,9 @@ build/
 db.mv.db
 db.trace.db
 
+### log ###
+*.log
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
