@@ -112,7 +112,6 @@ public class UserServiceImpl implements UserService{
         return new Account().setCreated(Timestamp.valueOf(LocalDateTime.now()))
                 .setPhoneNum(request.getPhoneNum())
                 .setEmail(request.getEmail())
-                .setPasswordHash(request.getPassword())
-                ;
+                .setPasswordHash(request.getPassword());
     }
 }
