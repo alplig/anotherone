@@ -8,9 +8,9 @@ import org.anotherone.dto.AccountResponse;
 import org.anotherone.dto.CreateAccountRequest;
 import org.anotherone.dto.CreateUserRequest;
 import org.anotherone.dto.UsersResponse;
-import org.anotherone.entity.AccountEntity;
-import org.anotherone.entity.RoleEntity;
-import org.anotherone.entity.UsersEntity;
+import org.anotherone.entity.Account;
+import org.anotherone.entity.Role;
+import org.anotherone.entity.Users;
 import org.anotherone.repository.AccountToRoleRepository;
 import org.anotherone.repository.UsersRepository;
 import org.springframework.stereotype.Service;
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UsersResponse createUser(@NonNull CreateUserRequest request) {
-        UsersEntity user = buildUserCreate(request);
+        Users user = buildUserCreate(request);
         return buildUserResponse(usersRepository.save(user));
     }
 
@@ -71,10 +71,10 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    private UsersResponse buildUserResponse(@NonNull UsersEntity user) {
+    private UsersResponse buildUserResponse(@NonNull Users user) {
         log.info("USER: " + user.toString());
         return new UsersResponse()
-                .setAccount(buildAccountResponse(user.getAccountEntityId()))
+                .setAccount(buildAccountResponse(user.getAccountId()))
                 .setCreated(user.getCreated().toLocalDateTime())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
@@ -82,34 +82,34 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    private AccountResponse buildAccountResponse (@NonNull AccountEntity accountEntity){
-        log.info("ACCOUNT: " + accountEntity.toString());
+    private AccountResponse buildAccountResponse (@NonNull Account account){
+        log.info("ACCOUNT: " + account.toString());
         return new AccountResponse()
-                .setEmail(accountEntity.getEmail())
-                .setPhoneNum(accountEntity.getPhoneNum())
-                .setRoles(getAllAccountRoles(accountEntity.getId()));
+                .setEmail(account.getEmail())
+                .setPhoneNum(account.getPhoneNum())
+                .setRoles(getAllAccountRoles(account.getId()));
     }
 
 
     private List<String> getAllAccountRoles(@NonNull Long accountId) {
         log.info("account ID for role list: " + accountId);
-        List<RoleEntity> entities = accountToRoleRepository.findAllRoleByAccountId(accountId);
+        List<Role> entities = accountToRoleRepository.findAllRoleByAccountId(accountId);
         return entities.stream()
-                .map(RoleEntity::getUserRole)
+                .map(Role::getUserRole)
                 .toList();
     }
 
-    private UsersEntity buildUserCreate(@NonNull CreateUserRequest request) {
-        return new UsersEntity()
+    private Users buildUserCreate(@NonNull CreateUserRequest request) {
+        return new Users()
                 .setCreated(Timestamp.valueOf(LocalDateTime.now()))
                 .setLastName(request.getLastName())
                 .setFirstName(request.getFirstName())
                 .setMiddleName(request.getMiddleName())
-                .setAccountEntityId(createAccount(request.getAccount()));
+                .setAccountId(createAccount(request.getAccount()));
     }
 
-    private AccountEntity createAccount(@NonNull CreateAccountRequest request) {
-        return new AccountEntity().setCreated(Timestamp.valueOf(LocalDateTime.now()))
+    private Account createAccount(@NonNull CreateAccountRequest request) {
+        return new Account().setCreated(Timestamp.valueOf(LocalDateTime.now()))
                 .setPhoneNum(request.getPhoneNum())
                 .setEmail(request.getEmail())
                 .setPasswordHash(request.getPassword());

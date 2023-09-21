@@ -2,7 +2,7 @@ package org.anotherone.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.anotherone.entity.RoleEntity;
+import org.anotherone.entity.Role;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ public class CreateAccountRequest {
     private String email;
     private String phoneNum;
     private Long password;
-    private List<RoleEntity> roleEntity;
+    private List<Role> role;
 }
