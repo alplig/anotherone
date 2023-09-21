@@ -8,9 +8,9 @@ import org.anotherone.dto.AccountResponse;
 import org.anotherone.dto.CreateAccountRequest;
 import org.anotherone.dto.CreateUserRequest;
 import org.anotherone.dto.UsersResponse;
-import org.anotherone.entity.Account;
-import org.anotherone.entity.Role;
-import org.anotherone.entity.Users;
+import org.anotherone.entity.AccountEntity;
+import org.anotherone.entity.RoleEntity;
+import org.anotherone.entity.UsersEntity;
 import org.anotherone.repository.AccountToRoleRepository;
 import org.anotherone.repository.UsersRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -38,7 +37,7 @@ public class UserServiceImpl implements UserService{
         return usersRepository.findAll()
                 .stream()
                 .map(this::buildUserResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @NonNull
@@ -54,7 +53,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UsersResponse createUser(@NonNull CreateUserRequest request) {
-        Users user = buildUserCreate(request);
+        UsersEntity user = buildUserCreate(request);
         return buildUserResponse(usersRepository.save(user));
     }
 
@@ -62,19 +61,20 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UsersResponse update(Long userId, CreateUserRequest request) {
-        return null;
+        return new UsersResponse();
     }
 
     @Override
     @Transactional
     public void delete(Long userId) {
+        // В процессе реализации.
     }
 
 
-    private UsersResponse buildUserResponse(@NonNull Users user) {
+    private UsersResponse buildUserResponse(@NonNull UsersEntity user) {
         log.info("USER: " + user.toString());
         return new UsersResponse()
-                .setAccount(buildAccountResponse(user.getAccountId()))
+                .setAccount(buildAccountResponse(user.getAccountEntityId()))
                 .setCreated(user.getCreated().toLocalDateTime())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
@@ -82,34 +82,34 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    private AccountResponse buildAccountResponse (@NonNull Account account){
-        log.info("ACCOUNT: " + account.toString());
+    private AccountResponse buildAccountResponse (@NonNull AccountEntity accountEntity){
+        log.info("ACCOUNT: " + accountEntity.toString());
         return new AccountResponse()
-                .setEmail(account.getEmail())
-                .setPhoneNum(account.getPhoneNum())
-                .setRoles(getAllAccountRoles(account.getId()));
+                .setEmail(accountEntity.getEmail())
+                .setPhoneNum(accountEntity.getPhoneNum())
+                .setRoles(getAllAccountRoles(accountEntity.getId()));
     }
 
 
     private List<String> getAllAccountRoles(@NonNull Long accountId) {
         log.info("account ID for role list: " + accountId);
-        List<Role> entities = accountToRoleRepository.findAllRoleByAccountId(accountId);
+        List<RoleEntity> entities = accountToRoleRepository.findAllRoleByAccountId(accountId);
         return entities.stream()
-                .map(Role::getUserRole)
-                .collect(Collectors.toList());
+                .map(RoleEntity::getUserRole)
+                .toList();
     }
 
-    private Users buildUserCreate(@NonNull CreateUserRequest request) {
-        return new Users()
+    private UsersEntity buildUserCreate(@NonNull CreateUserRequest request) {
+        return new UsersEntity()
                 .setCreated(Timestamp.valueOf(LocalDateTime.now()))
                 .setLastName(request.getLastName())
                 .setFirstName(request.getFirstName())
                 .setMiddleName(request.getMiddleName())
-                .setAccountId(createAccount(request.getAccount()));
+                .setAccountEntityId(createAccount(request.getAccount()));
     }
 
-    private Account createAccount(@NonNull CreateAccountRequest request) {
-        return new Account().setCreated(Timestamp.valueOf(LocalDateTime.now()))
+    private AccountEntity createAccount(@NonNull CreateAccountRequest request) {
+        return new AccountEntity().setCreated(Timestamp.valueOf(LocalDateTime.now()))
                 .setPhoneNum(request.getPhoneNum())
                 .setEmail(request.getEmail())
                 .setPasswordHash(request.getPassword());

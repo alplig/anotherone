@@ -12,11 +12,11 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@Table(name = Users.TABLE_NAME)
+@Table(name = "account_to_role", schema = "public", catalog = "postgres")
 @Entity
-public class Users {
+public class AccountToRoleEntity {
 
-    public static final String TABLE_NAME = "users";
+    public static final String TABLE_NAME = "account_to_role";
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,16 +32,17 @@ public class Users {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 
-    @Column(name = "first_name", nullable = false, length = 255)
-    private String firstName;
+    @ManyToOne
+    @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "fk_account_accounttorole"))
+    private AccountEntity accountEntityId;
 
-    @Column(name = "last_name", nullable = false, length = 255)
-    private String lastName;
+    @ManyToOne
+    @JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "fk_account_role"))
+    private RoleEntity roleEntityId;
 
-    @Column(name = "middle_name", nullable = true, length = 255)
-    private String middleName;
+    @Column(name = "start_date", nullable = false)
+    private Timestamp startDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "account_users_fk"))
-    private Account accountId;
+    @Column(name = "end_date", nullable = true)
+    private Timestamp endDate;
 }

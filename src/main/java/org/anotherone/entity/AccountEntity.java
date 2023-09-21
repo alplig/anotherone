@@ -12,11 +12,11 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@Table(name = "account_to_role", schema = "public", catalog = "postgres")
+@Table(name = AccountEntity.TABLE_NAME)
 @Entity
-public class AccountToRole {
+public class AccountEntity {
 
-    public static final String TABLE_NAME = "account_to_role";
+    public static final String TABLE_NAME = "account";
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,17 +32,15 @@ public class AccountToRole {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "fk_account_accounttorole"))
-    private Account accountId;
+    @Column(name = "email", nullable = true, length = 255)
+    private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "fk_account_role"))
-    private Role roleId;
+    @Column(name = "phone_num", nullable = true, length = 255)
+    private String phoneNum;
 
-    @Column(name = "start_date", nullable = false)
-    private Timestamp startDate;
+    @Column(name = "new_password_hash", nullable = true)
+    private Long newPasswordHash;
 
-    @Column(name = "end_date", nullable = true)
-    private Timestamp endDate;
+    @Column(name = "password_hash", nullable = false)
+    private Long passwordHash;
 }

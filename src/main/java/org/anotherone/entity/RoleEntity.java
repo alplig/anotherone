@@ -10,9 +10,9 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@Table(name = Role.TABLE_NAME)
+@Table(name = RoleEntity.TABLE_NAME)
 @Entity
-public class Role {
+public class RoleEntity {
 
     public static final String TABLE_NAME = "role";
 

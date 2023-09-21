@@ -12,11 +12,11 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@Table(name = Account.TABLE_NAME)
+@Table(name = UsersEntity.TABLE_NAME)
 @Entity
-public class Account {
+public class UsersEntity {
 
-    public static final String TABLE_NAME = "account";
+    public static final String TABLE_NAME = "users";
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,15 +32,16 @@ public class Account {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 
-    @Column(name = "email", nullable = true, length = 255)
-    private String email;
+    @Column(name = "first_name", nullable = false, length = 255)
+    private String firstName;
 
-    @Column(name = "phone_num", nullable = true, length = 255)
-    private String phoneNum;
+    @Column(name = "last_name", nullable = false, length = 255)
+    private String lastName;
 
-    @Column(name = "new_password_hash", nullable = true)
-    private Long newPasswordHash;
+    @Column(name = "middle_name", nullable = true, length = 255)
+    private String middleName;
 
-    @Column(name = "password_hash", nullable = false)
-    private Long passwordHash;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "account_users_fk"))
+    private AccountEntity accountEntityId;
 }
