@@ -29,7 +29,7 @@ public class Users {
     @Column(name = "modified", nullable = true)
     private Timestamp modified;
 
-    @Column(name = "is_deleted", nullable = false)
+    @Column(name = "is_deleted")
     private Boolean isDeleted;
 
     @Column(name = "first_name", nullable = false, length = 255)

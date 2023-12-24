@@ -21,4 +21,4 @@ springdoc:
   swagger-ui:
     path: swagger-ui.html
 server:
-  port: 9090
+  port: 9191

@@ -67,7 +67,9 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void delete(Long userId) {
-        // В процессе реализации.
+        Users user = usersRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User: " + userId + " not found"));
+        usersRepository.delete(user);
     }
 
 

@@ -31,4 +31,9 @@ public class UserControllers {
     public UsersResponse create(@RequestBody CreateUserRequest createUserRequest) {
         return userService.createUser(createUserRequest);
     }
+
+    @DeleteMapping(value = "/{userId}", produces = APPLICATION_JSON_VALUE)
+    public void deleteUserById(@PathVariable Long userId) {
+        userService.delete(userId);
+    }
 }
